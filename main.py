@@ -26,50 +26,32 @@ def main_menu():
         else:
             main_menu()
 
-
-def addToLedeger(source, destination, amount):
+def addToLedeger(wallet1, wallet2, amount):
     try:
-        # Opens the orginal ledger
-        with open("ledger.txt", 'r', encoding='utf-8') as ledger:
-            # loads the content as a python dictionary
+        #Opens the orginal ledger
+        with open("ledger.txt", "r") as ledger:
+            #loads the content as a python dictionary
             blockchain = json.load(ledger)
-        # copies the last header
-        lastHeader = blockchain['block' + str(len(blockchain) - 1)]["header"]
-        # Hashes the header using SHA256
-        hashedHead = hashlib.sha256(str(lastHeader).encode('utf-8')).hexdigest()
-        # Runs the mining puzzle to verify the hash
-        nonce, timestamp = mining(hashedHead)
-        # Prepares the data in a dictionary format
-        data = {"data": {
-            "fromWallet": source,
-            "toWallet": destination,
-            "amount": amount
-            }
-        }
-        # hashes the data using sha256
-        blockData = hashlib.sha256(str(data).encode('utf-8')).hexdigest()
-        # Creates a new entry in the dictionary of the id of the new block
-        blockchain['block' + str(len(blockchain))] = {
-            "header": {
-                "lastHash": hashedHead,
-                "timestamp": str(timestamp),
-                "nonce": nonce,
-                "hash": blockData
-            },
-            "data": {
-                "fromWallet": source,
-                "toWallet": destination,
+        #Hashes the header using SHA256
+        hashedHead = hashlib.sha256(str(blockchain).encode('utf-8')).hexdigest()
+        #Runs the mining puzzle to verify the hash
+        # nonce, timestamp = mining(str(hashedHead))
+        #Prepares the data in a dictionary format
+        data = { "data":{
+                "hash" : hashedHead,
+                "fromWallet": wallet1,
+                "toWallet":wallet2,
                 "amount": amount
-            }
-        }
+                    }
+                 }
+
         ledger.close()
-        # opens the ledger and dumps the updated dictionary
-        with open("ledger.txt", "w",encoding='utf-8') as ledger:
-            json.dump(blockchain, ledger)
+        #opens the ledger and dumps the updated dictionary
+        with open("ledger.txt", "w") as ledger:
+            json.dump(data, ledger)
         ledger.close()
     except:
         print("Error File not found")
-
 def check_balance():
     print('Which account would you like to check? (1/2/3)')
     account_number = input()
