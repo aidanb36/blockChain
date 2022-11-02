@@ -5,7 +5,6 @@ import hashlib
 import json
 from miner import mining
 
-
 def main_menu():
     print('Please select from the following options:')
     print('1. Check Wallet Balance')
@@ -70,7 +69,6 @@ def addToLedeger(source, destination, amount):
         ledger.close()
     except:
         print("Error File not found")
-
 
 def check_balance():
     print('Which account would you like to check? (1/2/3)')
