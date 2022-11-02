@@ -35,13 +35,14 @@ def addToLedeger(wallet1, wallet2, amount):
         #Hashes the header using SHA256
         hashedHead = hashlib.sha256(str(blockchain).encode('utf-8')).hexdigest()
         #Runs the mining puzzle to verify the hash
-        # nonce, timestamp = mining(str(hashedHead))
+        nonce = mining(str(hashedHead))
         #Prepares the data in a dictionary format
         data = { "data":{
                 "hash" : hashedHead,
                 "fromWallet": wallet1,
                 "toWallet":wallet2,
-                "amount": amount
+                "amount": amount,
+                "time" : nonce
                     }
                  }
 
