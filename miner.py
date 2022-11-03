@@ -18,6 +18,7 @@ DIFFICULTY = 5
 DISPLAY = True
 MINER_WALLET_FILE = 'miner_wallet.csv'
 
+
 def mining(previous_hash) -> tuple:
     """
     Perform mining work. Accept hash of previous block header and
@@ -33,11 +34,11 @@ def mining(previous_hash) -> tuple:
     to_hash = str(start).encode('utf-8')
     test_nonce = hashlib.sha256(to_hash).hexdigest()
 
-    while previous_hash[:DIFFICULTY] != test_nonce[:DIFFICULTY]:
-        update = t.now()
-        to_hash = str(update).encode('utf-8')
-        test_nonce = hashlib.sha256(to_hash).hexdigest()
-        #if DISPLAY:
+    # while previous_hash[:DIFFICULTY] != test_nonce[:DIFFICULTY]:
+    #     update = t.now()
+    #     to_hash = str(update).encode('utf-8')
+    #     test_nonce = hashlib.sha256(to_hash).hexdigest()
+        # if DISPLAY:
         #    print(test_nonce)
 
     nonce = test_nonce

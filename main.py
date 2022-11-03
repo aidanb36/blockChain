@@ -10,7 +10,7 @@ def main_menu():
     print('1. Check Wallet Balance')
     print('2. Transfer CatCoins')
     print('3. Quit CatCoin')
-    choice = input()
+    choice = input(">>>")
     while choice != '1' and choice != '2' and choice != '3':
         print('Invalid input. Try again: ')
         choice = input()
@@ -26,23 +26,25 @@ def main_menu():
         else:
             main_menu()
 
-def addToLedeger(wallet1, wallet2, amount):
+def ledgers(wallet1, wallet2, amount):
     try:
         #Opens the orginal ledger
         with open("ledger.txt", "r") as ledger:
             #loads the content as a python dictionary
             blockchain = json.load(ledger)
         #Hashes the header using SHA256
-        hashedHead = hashlib.sha256(str(blockchain).encode('utf-8')).hexdigest()
+        hash = hashlib.sha256(str(blockchain).encode('utf-8')).hexdigest()
         #Runs the mining puzzle to verify the hash
-        nonce = mining(str(hashedHead))
+        nonce,timestamp = mining(str(hash))
         #Prepares the data in a dictionary format
         data = { "data":{
-                "hash" : hashedHead,
+                "hash" : hash,
                 "fromWallet": wallet1,
                 "toWallet":wallet2,
                 "amount": amount,
-                "time" : nonce
+                "time": str(timestamp),
+                "nonce":nonce
+                # "time" : nonce
                     }
                  }
 
@@ -138,7 +140,7 @@ def transfer():
                     writer = csv.DictWriter(f, fieldnames=header)
                     writer.writeheader()
                     writer.writerows(data)
-                addToLedeger(source, destination, str(amount))
+                ledgers(source, destination, str(amount))
         print('Transaction complete')
         print('-----------------------------------------')
         main_menu()

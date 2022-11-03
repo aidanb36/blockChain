@@ -1,1 +1,1 @@
-{"data": {"hash": "497a64167425f1d6ccf7d70690c00a95122b019a9631870ca02f5003946f42ad", "fromWallet": "2", "toWallet": "3", "amount": "5.0"}}
+{"data": {"hash": "d218efa40b83ed7bd5997f0021b4e5fc793e53096cd03ed427337776c60d4c25", "fromWallet": "2", "toWallet": "3", "amount": "2.0", "time": "2022-11-03 13:15:43.891982", "nonce": "6e1be2357968b626b27b583f35a5817d013373b6d384e41f350772bc4af56fba"}}
